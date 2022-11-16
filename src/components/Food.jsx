@@ -2,7 +2,7 @@
 import FoodItem from './FoodItem.jsx';
 import React from 'react';
 
-const Food = ({food , onAdd , onReduce}) => {
+const Food = ({food , onAdd , onDelete}) => {
 
 //const food = {
  // name : 'Naziv',
@@ -20,7 +20,7 @@ const Food = ({food , onAdd , onReduce}) => {
     <div className='all-food'>
 
     {food.map((foodOne)=>(
-      <FoodItem foodItem={foodOne} key={foodOne.id} onAdd = {onAdd} onReduce = {onReduce} inCart = {1}/>
+      <FoodItem foodItem={foodOne} key={foodOne.id} onAdd = {onAdd} onDelete = {onDelete} inCart = {1}/>
      ))}
 
       { /*<FoodItem foodItem={food[0]} />
