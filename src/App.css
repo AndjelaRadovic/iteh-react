@@ -284,4 +284,11 @@ section {
 .card-img-left{
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
+  
+  
+}
+
+.card-img-top {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
