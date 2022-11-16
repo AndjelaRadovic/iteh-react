@@ -3,7 +3,12 @@
 import './App.css';
 import NavBar from './components/NavBar';
 import Food from './components/Food';
+import Cart from './components/Cart';
+
 import { useState } from "react";
+
+//       omotac,       switch  case
+import {BrowserRouter ,Routes ,Route }  from "react-router-dom";
 
 function App() {
 
@@ -56,12 +61,20 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <BrowserRouter className="App">
       
      <NavBar cartNum = {cartNum}></NavBar>
-     <Food food={food} onAdd={addFoodItem}/>
-     
-    </div>
+     <Routes>
+        <Route path="/" 
+        element={<Food food = {food} onAdd = {addFoodItem} />}
+        />
+
+        <Route path="/cart*" 
+        element={<Cart food = {food}/>}
+        />
+
+      </Routes>     
+    </BrowserRouter>
   );
 }
 
