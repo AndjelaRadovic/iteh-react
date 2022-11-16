@@ -17,8 +17,8 @@ function App() {
  // const [state, setstate] = useState(initialState)
 
  const [cartNum, setCartNum] = useState(0);
-
-  const food = [
+ const [cartFood, setCartFood] = useState([]);
+ const [food] = useState ([
     {
       id:1,
       name: "Pizza Margherita",
@@ -51,12 +51,45 @@ function App() {
       amount: 0,
     },
   
-  ];
+  ]);
 
-  function addFoodItem(name) {
+
+  //slicno kao map ili foreach, razbija niz na pojedinacne
+  function refreshCart(){
+    let newFood = food.filter((foodItem) => foodItem.amount>0);
+    setCartFood(newFood);
+  }
+
+  function addFoodItem(name,id) {
     console.log("Dodat je proizvod: " + name);
     setCartNum(cartNum + 1);
+    //console.log("Broj proizvoda u korpi: " + cartNum);
+   
+    food.forEach((foodItem) => {
+      if(foodItem.id === id){
+        foodItem.amount++;
+      }
+      console.log(foodItem.amount);
+    });
+
+    refreshCart();
+
+
+  }
+
+  function reduceFoodItem(name,id){
+    console.log("Oduzet je proizvod: " + name);
+    setCartNum(cartNum - 1);
     console.log("Broj proizvoda u korpi: " + cartNum);
+    
+    food.forEach((foodItem) => {
+      if(foodItem.id === id){
+        foodItem.amount--;
+      }
+      console.log(foodItem.amount);
+    });
+
+    refreshCart();
 
   }
 
@@ -66,11 +99,10 @@ function App() {
      <NavBar cartNum = {cartNum}></NavBar>
      <Routes>
         <Route path="/" 
-        element={<Food food = {food} onAdd = {addFoodItem} />}
+        element={<Food food = {food} onAdd = {addFoodItem} onReduce = {reduceFoodItem}/>}
         />
 
-        <Route path="/cart*" 
-        element={<Cart food = {food}/>}
+        <Route path="/cart"  element={<Cart food = {cartFood}/>}
         />
 
       </Routes>     
